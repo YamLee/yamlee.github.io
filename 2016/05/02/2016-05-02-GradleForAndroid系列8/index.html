@@ -88,7 +88,7 @@
 有几种方式可以为Android设置CI。最广泛使用的是Jenkins，TeamCity和Travis CI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gradle For Android系列8：设置CI(集成开发环境)">
-<meta property="og:url" content="http:/yamlee.me/2016/05/02/GradleForAndroid系列8/index.html">
+<meta property="og:url" content="http:/yamlee.me/2016/05/02/2016-05-02-GradleForAndroid系列8/index.html">
 <meta property="og:site_name" content="Lee Blog">
 <meta property="og:description" content="持续集成（CI）是一种开发实践方式，需要团队中的开发人员定期集成他们的工作，通常每天多次。每次推送到主代码仓库都需要通过自动构建进行验证。这种做法有助于尽快发现问题，从而加快开发速度，并提高代码的质量。大拿Martin Fowler写了一篇关于这个主题的文章，解释了这些概念，并描述了最佳实践
 有几种方式可以为Android设置CI。最广泛使用的是Jenkins，TeamCity和Travis CI">
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http:/yamlee.me/2016/05/02/GradleForAndroid系列8/"/>
+  <link rel="canonical" href="http:/yamlee.me/2016/05/02/2016-05-02-GradleForAndroid系列8/"/>
 
   <title> Gradle For Android系列8：设置CI(集成开发环境) | Lee Blog </title>
 </head>
@@ -298,8 +298,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/02/GradleForAndroid系列8/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/02/GradleForAndroid系列8/" itemprop="commentsCount"></span>
+                <a href="/2016/05/02/2016-05-02-GradleForAndroid系列8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/02/2016-05-02-GradleForAndroid系列8/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -362,15 +362,15 @@
 <p>由于Travis内部运行机制，你无法在Build Server部署Travis,你需要做的只是创建一个配置文件，包含Travis构建应用程序或Library所需的各种信息。</p>
 <h3 id="Travis-CI配置Android构建"><a href="#Travis-CI配置Android构建" class="headerlink" title="Travis CI配置Android构建"></a>Travis CI配置Android构建</h3><p>如果要为项目启用Travis构建，首先你需要登录到Travis CI并将你的帐户连接到GitHub。一旦完成，你需要在设置中启用你想要构建的项目。</p>
 <p>为了配置构建过程，Travis需要你创建一个名为<strong>.travis.yml</strong>的文件，其中包含整个设置。 要配置Android项目，您需要定义语言属性并添加一些Android特定的属性：</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">language:</span> <span class="keyword">android</span></div><div class="line"><span class="symbol">  android:</span></div><div class="line"><span class="symbol">    components:</span></div><div class="line">      <span class="comment"># The build tools version used by your project</span></div><div class="line">      - <span class="keyword">build-tools-22.0.1</span></div><div class="line">      <span class="comment"># The SDK version used to compile your project</span></div><div class="line">      - <span class="keyword">android-22</span></div><div class="line">      <span class="comment"># Additional components</span></div><div class="line">      - <span class="keyword">extra-android-m2repository</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">language: android</div><div class="line">  android:</div><div class="line">    components:</div><div class="line">      # The build tools version used by your project</div><div class="line">      - build-tools-22.0.1</div><div class="line">      # The SDK version used to compile your project</div><div class="line">      - android-22</div><div class="line">      # Additional components</div><div class="line">      - extra-android-m2repository</div></pre></td></tr></table></figure>
 <p>language设置指定要运行哪种构建。在上面代码中，language指定为android表示构建android程序。 Android特定的属性包括需要使用的构建工具的版本和Android SDK版本。Travis将在运行构建任务之前下载这些文件。如果你使用support Library或Google Play服务，这都需要明确指定，因为Travis也需要下载这些依赖关系的Library。</p>
 <blockquote>
 <p>travis配置中每个有规定一定要配置构建工具和SDK版本，但如果你确保版本与build.gradle文件中指定的版本一致，则会尽量减少一些异常问题的出现。</p>
 </blockquote>
 <p>如果Android项目是在Windows平台上创建的，Gradle wrapper可能会有权限的问题。因此，在运行实际构建脚本之前修需要赋予gradlew文件正确的权限。你可以像这样添加预构建步骤：</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">before_script:</span></div><div class="line">    <span class="meta"># Change Gradle wrapper permissions</span></div><div class="line">    - chmod +<span class="built_in">x</span> gradlew</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">before_script:</div><div class="line">    # Change Gradle wrapper permissions</div><div class="line">    - chmod +x gradlew</div></pre></td></tr></table></figure>
 <p>启动Android构建，请将此行添加到Travis配置文件：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Let's build</span></div><div class="line">   <span class="keyword">script</span>: ./gradlew clean build</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Let&apos;s build</div><div class="line">   script: ./gradlew clean build</div></pre></td></tr></table></figure>
 <p>上面的命令将运行Gradle wrapper程序，就像在开发人员机器上一样，执行Gradle clean和build任务。</p>
 <p>完成配置Travis后，你可以提交并将文件推送到项目的GitHub仓库。如果一切都正确设置，Travis将开始构建，你可以在Travis网站上跟踪。如下是项目成功构建后的样子：</p>
 <p><img src="http://ww3.sinaimg.cn/large/6b051377gw1f9euuiiri9j20kv07ydgf.jpg" alt=""></p>
@@ -387,14 +387,14 @@
 <p>运行功能测试最简单的选择是在Build Server上启动一个模拟器，并保持它一直打开。不幸的是，这不是一个最佳的解决方案，因为Android模拟器很容易发生随机崩溃，特别是当开启了很长时间后。</p>
 <p>如果你使用Jenkins，有一个称为<a href="https://wiki.jenkins-ci.org/display/JENKINS/Android+Emulator+Plugin" target="_blank" rel="external">Android模拟器插件</a>的Jenkins插件，可以配置为每个你需要构建的应用程序或Library启动一个模拟器。TeamCity也有一个活跃的插件生态系统，有一个称为Android模拟器的插件，与Jenkins插件一样，也是为每次构建设置一个模拟器。你可以在<a href="https://confluence.jetbrains.com/display/TW/TeamCity+Plugins" target="_blank" rel="external">TeamCity官方插件</a>页面上找到它以及其他TeamCity的插件。</p>
 <p>Travis CI有能力启动一个模拟器，但这是一个实验功能。如果要尝试它，请将此代码段添加到.travis.yml配置文件中，以在Travis构建期间启动Android模拟器：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># Emulator Managemen<span class="variable">t:</span> Create, Start <span class="built_in">and</span> Wait</div><div class="line">  before_scrip<span class="variable">t:</span></div><div class="line">    - <span class="keyword">echo</span> <span class="keyword">no</span> | android create avd --force -n test -t android-<span class="number">22</span> --</div><div class="line">      abi armeabi-v7a</div><div class="line">    - emulator -avd test -<span class="keyword">no</span>-skin -<span class="keyword">no</span>-audio -<span class="keyword">no</span>-window &amp;</div><div class="line">    - android-wait-<span class="keyword">for</span>-emulator</div><div class="line">    - adb <span class="keyword">shell</span> <span class="built_in">input</span> keyevent <span class="number">82</span> &amp;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># Emulator Management: Create, Start and Wait</div><div class="line">  before_script:</div><div class="line">    - echo no | android create avd --force -n test -t android-22 --</div><div class="line">      abi armeabi-v7a</div><div class="line">    - emulator -avd test -no-skin -no-audio -no-window &amp;</div><div class="line">    - android-wait-for-emulator</div><div class="line">    - adb shell input keyevent 82 &amp;</div></pre></td></tr></table></figure>
 <p><strong>“android-wait-for-emulator”</strong>指令告诉Travis等待模拟器启动。当模拟器启动时，执行<strong>“adb shell input keyevent 82 &amp;”</strong>以解锁屏幕。之后，你即可以执行Gradle测试。</p>
 <h3 id="持续发布"><a href="#持续发布" class="headerlink" title="持续发布"></a>持续发布</h3><p>为了协助开发人员自动部署Android应用，Google发布了<strong>Google Play Developer API</strong>，这是一种以程序化化方式将APK传送至Google Play的<a href="https://developers.google.com/android-publisher" target="_blank" rel="external">API</a>,此API再也无需你打开浏览器，登录Google Play，使用网络界面上传APK这些繁琐的步骤。你不必基于Google Play开发者API创建自己的发布脚本，有许多第三方的Gradle插件就支持，通过插件，你可以直接在构建系统成功构建之后，将APK推送到Google Play上。</p>
 <p>有一个名为<a href="https://wiki.jenkins-ci.org/display/JENKINS/Google+Play+Android+Publisher+Plugin" target="_blank" rel="external">Google Play Android Publisher</a>的Jenkins插件，可以处理发布任务。然而，更好的选择是使用Gradle插件，以便你可以从任何设备和任何其他的持续集成系统执行发布任务。Android社群中的一些人创建了一个基于Google Play Developer API的Gradle插件，可以配置整个发布过程。 你可以在GitHub上找到<a href="https://github.com/Triple-T/gradle-play-publisher" target="_blank" rel="external">Gradle Play Publisher Gradle插件</a>源代码或直接依赖Maven Central或JCenter的插件包。</p>
 <p>使用此插件，需要将如下代码添加到主build.gradle文件中：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">buildscript</span> &#123;</div><div class="line">	<span class="keyword">repositories</span> &#123;</div><div class="line">		jcenter()</div><div class="line">	&#125;</div><div class="line">    <span class="keyword">dependencies</span> &#123;</div><div class="line">        <span class="keyword">classpath</span> <span class="string">'com.github.triplet.gradle:play-publisher:1.0.4'</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">	repositories &#123;</div><div class="line">		jcenter()</div><div class="line">	&#125;</div><div class="line">    dependencies &#123;</div><div class="line">        classpath &apos;com.github.triplet.gradle:play-publisher:1.0.4&apos;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后在Android模块的build.gradle文件中应用插件：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply <span class="string">plugin:</span> <span class="string">'play'</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply plugin: &apos;play&apos;</div></pre></td></tr></table></figure>
 <p>当插件被应用到项目中后，你可以在gradle任务列表中发现一些新任务：</p>
 <ul>
 <li>publishApkRelease 上传apk</li>
@@ -404,9 +404,9 @@
 <p>如果你有不同的Build Type，还可以执行这些特定版本的publish任务，例如publishApkFreeRelease和publishApkPaidRelease。</p>
 <p>要访问Google Play开发者API，你需要设置Google Play帐户。这个设置超出了本文档的范围，但如果你想使用Gradle Play Publisher插件，账号配置是必需的。使用详细步骤，可以按照Google Play Developer API文档中的步骤操作。<a href="https://developers.google.com/android- publisher/getting_started" target="_blank" rel="external">官方介绍</a></p>
 <p>创建服务帐户后，你可以在构建配置文件中输入密钥，如下所示：</p>
-<figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">play</span> &#123;</div><div class="line">       serviceAccountEmail = <span class="string">'serviceaccount'</span></div><div class="line">       pk12File = <span class="keyword">file</span>(<span class="string">'key.p12'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">play &#123;</div><div class="line">       serviceAccountEmail = &apos;serviceaccount&apos;</div><div class="line">       pk12File = file(&apos;key.p12&apos;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>play块用于Gradle Play Publisher插件的属性。除了服务帐户密钥配置，你还可以指定APK应推送到的渠道：</p>
-<figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">play</span> &#123;</div><div class="line">    <span class="keyword">track</span> = <span class="string">'production'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">play &#123;</div><div class="line">    track = &apos;production&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>默认渠道是alpha，但你可以将其更改为beta或production。</p>
 <h3 id="Beta发布"><a href="#Beta发布" class="headerlink" title="Beta发布"></a>Beta发布</h3><p>Android应用的测试发布有很多选项，例如Google Play Store本身的测试版。另一个选项是<a href="https://crashlytics.com" target="_blank" rel="external">Crashlytics</a>，Creashlytics很好的集成了Gradle。Crashlytics的团队创建了一个自定义插件，它不仅创建了新的Gradle任务来发布版本到他们的平台，还整合了Android插件的任务来处理ProGuard混淆的mapping。</p>
 <p>使用Crashlytics，请按照其网站上的步骤操作。一旦你设置了它，它将开始钩到你的构建。 Crashlytics会暴露一个名为<strong>crashlyticsUploadDistributionInternal</strong>的新任务，此任务可以用来上传APK到Crashlytics。要推送新版本的应用程序，你首先需要使用build或assemble任务来构建它。一旦APK准备就绪，你就可以使用<strong>crashlyticsUploadDistributionInternal</strong>任务将其上传到Crashlytics。Crashlytics插件为你项目中的每个build variant创建一个上传任务。</p>
@@ -454,7 +454,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/28/GradleForAndroid系列7/" rel="next" title="Gradle For Android系列7：gradle任务和插件开发">
+              <a href="/2016/04/28/2016-04-28-GradleForAndroid系列7/" rel="next" title="Gradle For Android系列7：gradle任务和插件开发">
                 <i class="fa fa-chevron-left"></i> Gradle For Android系列7：gradle任务和插件开发
               </a>
             
@@ -462,7 +462,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/10/GradleForAndroid系列9/" rel="prev" title="Gradle For Android系列9：高级配置">
+              <a href="/2016/05/10/2016-05-10-GradleForAndroid系列9/" rel="prev" title="Gradle For Android系列9：高级配置">
                 Gradle For Android系列9：高级配置 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -490,8 +490,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/02/GradleForAndroid系列8/"
-           data-title="Gradle For Android系列8：设置CI(集成开发环境)" data-url="http:/yamlee.me/2016/05/02/GradleForAndroid系列8/">
+      <div class="ds-thread" data-thread-key="2016/05/02/2016-05-02-GradleForAndroid系列8/"
+           data-title="Gradle For Android系列8：设置CI(集成开发环境)" data-url="http:/yamlee.me/2016/05/02/2016-05-02-GradleForAndroid系列8/">
       </div>
     
   </div>

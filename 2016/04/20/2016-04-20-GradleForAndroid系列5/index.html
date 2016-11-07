@@ -87,7 +87,7 @@
 <meta name="description" content="Android Studio不仅可以为应用和库创建模块，还可以为Android Wear，Android TV，Google App Engine等创建模块。 所有这些模块可以在单个项目中一起使用。 例如，你可能需要创建一个应用，该应用使用Google Cloud Endpoints作为后端，并包含与Android Wear的集成。 在这种情况下，你可以拥有一个包含三个不同模块的项目：一个用于应用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gradle For Android系列5：多模块构建管理">
-<meta property="og:url" content="http:/yamlee.me/2016/04/20/GradleForAndroid系列5/index.html">
+<meta property="og:url" content="http:/yamlee.me/2016/04/20/2016-04-20-GradleForAndroid系列5/index.html">
 <meta property="og:site_name" content="Lee Blog">
 <meta property="og:description" content="Android Studio不仅可以为应用和库创建模块，还可以为Android Wear，Android TV，Google App Engine等创建模块。 所有这些模块可以在单个项目中一起使用。 例如，你可能需要创建一个应用，该应用使用Google Cloud Endpoints作为后端，并包含与Android Wear的集成。 在这种情况下，你可以拥有一个包含三个不同模块的项目：一个用于应用">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/6b051377gw1f9bmsun2c1j21e214qtcw.jpg">
@@ -117,7 +117,7 @@
 
 
 
-  <link rel="canonical" href="http:/yamlee.me/2016/04/20/GradleForAndroid系列5/"/>
+  <link rel="canonical" href="http:/yamlee.me/2016/04/20/2016-04-20-GradleForAndroid系列5/"/>
 
   <title> Gradle For Android系列5：多模块构建管理 | Lee Blog </title>
 </head>
@@ -291,8 +291,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/20/GradleForAndroid系列5/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/20/GradleForAndroid系列5/" itemprop="commentsCount"></span>
+                <a href="/2016/04/20/2016-04-20-GradleForAndroid系列5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/20/2016-04-20-GradleForAndroid系列5/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -328,20 +328,20 @@
 <a id="more"></a>
 <h2 id="解析多模块构建"><a href="#解析多模块构建" class="headerlink" title="解析多模块构建"></a>解析多模块构建</h2><p>通常，项目根目录下包含多个子模块项目来组织多模块项目。要告诉Gradle项目是如何结构化的，哪些目录包含模块，你需要在项目的根目录中提供一个settings.gradle文件。然后每个模块都可以提供自己的build.gradle文件。我们已经在<a href="">第2章“基本构建自定义”</a>中了解了settings.gradle和build.gradle文件的工作方式，因此这里我们将仅关注如何将它们用于多模块项目。</p>
 <p>多模块项目结构目录如下：</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">project</div><div class="line">    <span class="string">|-setting.gradle</span></div><div class="line">    <span class="string">|-build.gradle</span></div><div class="line">    <span class="string">|-app</span></div><div class="line">        <span class="string">|-buid.gradle</span></div><div class="line">    <span class="string">|-library</span></div><div class="line">        <span class="string">|-build.gradle</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">project</div><div class="line">    |-setting.gradle</div><div class="line">    |-build.gradle</div><div class="line">    |-app</div><div class="line">        |-buid.gradle</div><div class="line">    |-library</div><div class="line">        |-build.gradle</div></pre></td></tr></table></figure>
 <p>这是设置具有多模块项目最简单和最直接的方法。 settings.gradle文件声明项目中所有模块，其内容如下所示：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">include</span> <span class="string">':app'</span>, <span class="string">':library'</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">include &apos;:app&apos;, &apos;:library&apos;</div></pre></td></tr></table></figure>
 <p>确保应用程序和库模块包含在构建配置中。你只需要添加模块的目录的名称到settings文件中。</p>
 <p>要将库模块添加为应用程序模块的依赖，你需要将其添加到应用程序模块的build.gradle文件：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':library'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">       compile project(&apos;:library&apos;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>为了对模块添加依赖，您需要使用project（）方法，<br>以模块路径作为参数。</p>
 <p>如果要使用子目录来组织模块，可以配置Gradle以满足你的需求。 例如，你可以具有如下所示的目录结构：</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">project</div><div class="line">    <span class="string">|-setting.gradle</span></div><div class="line">    <span class="string">|-build.gradle</span></div><div class="line">    <span class="string">|-app</span></div><div class="line">        <span class="string">|-build.gradle</span></div><div class="line">    <span class="string">|-libraries</span></div><div class="line">        <span class="string">|-library1</span></div><div class="line">            <span class="string">|-build.gradle</span></div><div class="line">        <span class="string">|-library2</span></div><div class="line">            <span class="string">|-build.gradle</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">project</div><div class="line">    |-setting.gradle</div><div class="line">    |-build.gradle</div><div class="line">    |-app</div><div class="line">        |-build.gradle</div><div class="line">    |-libraries</div><div class="line">        |-library1</div><div class="line">            |-build.gradle</div><div class="line">        |-library2</div><div class="line">            |-build.gradle</div></pre></td></tr></table></figure>
 <p>应用程序模块跟原来一样还是位于项目根目录下，但项目现在有两个不同的库模块。这些库模块不位于项目的根目录，但在一个特定的libraries目录。有了这个目录结构，你可以在这样settings.gradle声明应用程序和库模块：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">include</span> <span class="string">':app'</span>, <span class="string">':libraries:library1'</span>, <span class="string">':libraries:library2'</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">include &apos;:app&apos;, &apos;:libraries:library1&apos;, &apos;:libraries:library2&apos;</div></pre></td></tr></table></figure>
 <p>注意到在子目录中声明模块是很容易的。 所有路径都相对于根目录（settings.gradle文件所在的位置）。 冒号用作路径中的正斜杠的替换。</p>
 <p>当在子目录中将模块作为依赖关系添加到另一个模块时，应该始终从根目录引用它。 这意味着，如果上一个示例中的应用程序模块依赖于library1，应用程序模块的build.gradle文件应如下所示：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':libraries:library1'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">       compile project(&apos;:libraries:library1&apos;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果在子目录中声明依赖关系，所有路径应该仍然相对于根目录。 这样做的是因为Gradle从项目的根目录开始构建项目的依赖关系模型。</p>
 <h3 id="Build生命周期回顾"><a href="#Build生命周期回顾" class="headerlink" title="Build生命周期回顾"></a>Build生命周期回顾</h3><p>了解构建过程模型是如何构建的可以让你更容易理解多模块项目的组成原理。 我们已经在<a href="">第1章 开始使用Gradle和Android Studio</a>中讨论了构建生命周期，因此你已经了解了基础知识，但是一些细节对于多模块构建尤其重要。</p>
 <p>在第一阶段，初始化阶段，Gradle寻找一个settings.gradle文件。如果此文件不存在，Gradle会假定你只有一个构建模块。如果你有多个模块，则需要在setting文件中定义包含各个模块的目录。如果这些子目录包含自己的build.gradle文件，Gradle将处理这些子目录，并将它们合并到构建过程模型中。这就解释了为什么你在app模块依赖library模块时，依赖的路径需要相对于根路径 Gradle将总是尝试从根路径中找出依赖。</p>
@@ -354,22 +354,22 @@
 <p><img src="http://ww3.sinaimg.cn/large/6b051377gw1f9bmsun2c1j21e214qtcw.jpg" alt=""></p>
 <p>在以下部分中，将展示如何将不同模块添加到Android Studio中，顺带解释其自定义属性，并指定如何更改构建过程。</p>
 <h3 id="添加Java-Library模块"><a href="#添加Java-Library模块" class="headerlink" title="添加Java Library模块"></a>添加Java Library模块</h3><p>当你添加新的Java库模块时，Android Studio生成的build.gradle文件如下所示：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">apply plugin: <span class="string">'java'</span></div><div class="line"></div><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">apply plugin: &apos;java&apos;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">       compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Java库模块使用Java插件，而不是我们常用的Android插件。这意味着很多Android特定的属性和任务不可用，在Java库中，你不也需要那些任务。</p>
 <p>构建文件还具有基本的依赖关系管理设置，因此你可以将JAR文件添加到libs文件夹，而无需任何特殊配置。 你可以使用<a href="">第3章“管理依赖关系”</a>中学到的内容添加更多依赖关系。依赖关系配置不依赖于Android插件。</p>
 <p>例如,要将名为javalib的Java库模块添加为应用程序模块的依赖关系。只需将此行添加到应用程序模块的构建配置文件中：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':javalib'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">       compile project(&apos;:javalib&apos;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Gradle会在构建中导入一个名为javalib的模块。如果在应用程序模块中添加此模块的依赖，那么javalib模块将始终在应用程序模块构建之前先行构建。</p>
 <h3 id="添加Android-Library模块"><a href="#添加Android-Library模块" class="headerlink" title="添加Android Library模块"></a>添加Android Library模块</h3><p>Android Library的默认build.gradle文件从这行开始：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply <span class="string">plugin:</span> <span class="string">'com.android.library'</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply plugin: &apos;com.android.library&apos;</div></pre></td></tr></table></figure>
 <p>在Android Library模块上添加依赖关系的方法与Java库完全相同：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':androidlib'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">       compile project(&apos;:androidlib&apos;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Android Library不仅包含Java代码，而且还包含所有Android资源，例如manifest文件，string和layout。 在应用中引用Android Library后，你可以使用Libarary中的所有的class和resource。</p>
 <h3 id="集成Android-Wear"><a href="#集成Android-Wear" class="headerlink" title="集成Android Wear"></a>集成Android Wear</h3><p>如果你想将应用程序深度整合到Android Wear中，就必须新增Android Wear模块。但需要注意的是，Android Wear模块也使用Android application plugin。这意味着application的所有构建属性和任务都可用。</p>
 <p>build.gradle文件与常规Android应用程序模块不同的唯一部分是依赖性配置：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])</div><div class="line">       <span class="keyword">compile</span> <span class="string">'com.google.android.support:wearable:1.1.0'</span></div><div class="line">       <span class="keyword">compile</span> <span class="string">'com.google.android.gms:play-services-wearable:6.5.87'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">       compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])</div><div class="line">       compile &apos;com.google.android.support:wearable:1.1.0&apos;</div><div class="line">       compile &apos;com.google.android.gms:play-services-wearable:6.5.87&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>每个Android Wear应用都依赖于Google提供的几个Android Wear专用库。要在Android应用中依赖Android Wear应用，你可以在Android应用中加入wear库的依赖：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       wearApp <span class="keyword">project</span>(<span class="string">':wear'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">       wearApp project(&apos;:wear&apos;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以上配置可确保Wear模块在进行必要的设置后将wear模块的APK被添加到Android应用程序的APK中。</p>
 <h3 id="使用Google-App-Engine"><a href="#使用Google-App-Engine" class="headerlink" title="使用Google App Engine"></a>使用Google App Engine</h3><blockquote>
 <p>原文中有较详细的介绍，因为被墙，所以暂时不作介绍</p>
@@ -380,7 +380,7 @@
 <p>Gradle工具窗口使运行特定模块的Gradle任务变得更加容易。但是问题是没有选项可以同时运行所有模块的任务了，所以你的需求是希望Gradle任务同时在所有模块上生效，使用命令行还是更快一些。</p>
 <h3 id="加快多模块编译速度"><a href="#加快多模块编译速度" class="headerlink" title="加快多模块编译速度"></a>加快多模块编译速度</h3><p>当你构建多模块项目时，Gradle会按顺序处理所有模块。 随着多核计算机越来越多，你可以设置并行构建来加快构建速度。此功能在Gradle中已存在，但默认情况下未启用。</p>
 <p>如果要对项目应用并行构建执行，则需要在项目根目录下的gradle.properties文件中配置parallel属性：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">org<span class="selector-class">.gradle</span><span class="selector-class">.parallel</span>=true</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">org.gradle.parallel=true</div></pre></td></tr></table></figure>
 <p>Gradle会根据可用的CPU内核数选择正确的线程数。为了防止在同一模块并行执行而产生并发问题，每个线程都拥有一整个模块。</p>
 <h3 id="模块耦合"><a href="#模块耦合" class="headerlink" title="模块耦合"></a>模块耦合</h3><p>正如我们在<a href="">第2章“基本构建定制”</a>中看到的，可以使用build.gradle文件中的<strong>allprojects</strong>定义项目中所有模块的属性。当你具有包含多个模块的项目时，可以使用任何模块中的<strong>allprojects</strong>将属性应用于项目中的所有模块。一个模块甚至可以引用另一个模块的属性。这些强大的功能可以使多模块构建的维护更容易。但缺点是，你的模块变得耦合。</p>
 <p>一旦两个模块访问对方的任务或属性，就认为它们是耦合的。这有几个后果，例如，模块变得难以移植，当你试图将某一个项目引用到其他项目中时，因为模块间的耦合，导致抽离出模块很困难；模块耦合对并行构建也有影响,在模块中使用allprojects块将使并行构建执行无效。以上两点都需要注意。</p>
@@ -429,7 +429,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/17/GradleForAndroid系列4/" rel="next" title="Gradle For Android系列4：创建Build Variants">
+              <a href="/2016/04/17/2016-04-17-GradleForAndroid系列4/" rel="next" title="Gradle For Android系列4：创建Build Variants">
                 <i class="fa fa-chevron-left"></i> Gradle For Android系列4：创建Build Variants
               </a>
             
@@ -437,7 +437,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/04/25/GradleForAndroid系列6/" rel="prev" title="Gradle For Android系列6：运行测试">
+              <a href="/2016/04/25/2016-04-25-GradleForAndroid系列6/" rel="prev" title="Gradle For Android系列6：运行测试">
                 Gradle For Android系列6：运行测试 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -465,8 +465,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/20/GradleForAndroid系列5/"
-           data-title="Gradle For Android系列5：多模块构建管理" data-url="http:/yamlee.me/2016/04/20/GradleForAndroid系列5/">
+      <div class="ds-thread" data-thread-key="2016/04/20/2016-04-20-GradleForAndroid系列5/"
+           data-title="Gradle For Android系列5：多模块构建管理" data-url="http:/yamlee.me/2016/04/20/2016-04-20-GradleForAndroid系列5/">
       </div>
     
   </div>

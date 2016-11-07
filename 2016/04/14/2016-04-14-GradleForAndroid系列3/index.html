@@ -89,12 +89,12 @@
 依赖仓库传统的第三方包引用需要下载相应的Jar包，然后加入到项目中，这种方式一是找Jar包比较繁琐，再就是J">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gradle For Android系列3：gradle依赖管理">
-<meta property="og:url" content="http:/yamlee.me/2016/04/14/GradleForAndroid系列3/index.html">
+<meta property="og:url" content="http:/yamlee.me/2016/04/14/2016-04-14-GradleForAndroid系列3/index.html">
 <meta property="og:site_name" content="Lee Blog">
 <meta property="og:description" content="gradle中的依赖可以说是gradle引以为傲的一个特性，你只要需要添加一行代码，gradle就可以自动通过配置的依赖仓库去下载你所需要的第三方包，如果你依赖的某个项目还会依赖其他的其他的项目（传递性依赖：transitive dependencies）,gradle会自动解决其依赖
 
 依赖仓库传统的第三方包引用需要下载相应的Jar包，然后加入到项目中，这种方式一是找Jar包比较繁琐，再就是J">
-<meta property="og:updated_time" content="2016-11-07T06:22:06.000Z">
+<meta property="og:updated_time" content="2016-11-07T06:27:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gradle For Android系列3：gradle依赖管理">
 <meta name="twitter:description" content="gradle中的依赖可以说是gradle引以为傲的一个特性，你只要需要添加一行代码，gradle就可以自动通过配置的依赖仓库去下载你所需要的第三方包，如果你依赖的某个项目还会依赖其他的其他的项目（传递性依赖：transitive dependencies）,gradle会自动解决其依赖
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http:/yamlee.me/2016/04/14/GradleForAndroid系列3/"/>
+  <link rel="canonical" href="http:/yamlee.me/2016/04/14/2016-04-14-GradleForAndroid系列3/"/>
 
   <title> Gradle For Android系列3：gradle依赖管理 | Lee Blog </title>
 </head>
@@ -294,8 +294,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/14/GradleForAndroid系列3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/GradleForAndroid系列3/" itemprop="commentsCount"></span>
+                <a href="/2016/04/14/2016-04-14-GradleForAndroid系列3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/14/2016-04-14-GradleForAndroid系列3/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -326,49 +326,50 @@
 <p>gradle默认不会添加依赖仓库，但是Android Studio会在project的根build.gradle文件中添加如下代码</p>
 </blockquote>
 <a id="more"></a>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">repositories</span>&#123;</div><div class="line">		jcenter()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repositories&#123;</div><div class="line">		jcenter()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>gradle支持三种依赖库：Maven，Ivy和静态文件或者目录（aar,jar等文件或者libs目录），添加依赖后，当要执行gradle task就会同步，gradle会将对应版本下载到本地（~/.gradle目录下）所以一个依赖版本只用下载一次。</p>
 <p>添加依赖只需要在相应模块的build.gradle文件下添加如下代码块</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">	compile <span class="string">group:</span> <span class="string">'com.google.code.gson'</span>, <span class="string">name:</span> <span class="string">'gson'</span>,<span class="string">version:</span><span class="string">'2.3'</span></div><div class="line">    compile <span class="string">group:</span> <span class="string">'com.squareup.retrofit'</span>, <span class="string">name:</span> <span class="string">'retrofit'</span>,<span class="string">version:</span> <span class="string">'1.9.0'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">	compile group: &apos;com.google.code.gson&apos;, name: &apos;gson&apos;,version:&apos;2.3&apos;</div><div class="line">    compile group: &apos;com.squareup.retrofit&apos;, name: &apos;retrofit&apos;,version: &apos;1.9.0&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>从上可知，一行依赖的代码有三个要素：group，name,version,其中name是必须得，group和version是可选的，但是默认都是添加group和version保证其准确性和gradle的运行正确，gradle还提供如下简写方式，一般也是用的如下简写方式</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span>&#123;</div><div class="line">	<span class="keyword">compile</span> <span class="string">'com.google.code.gson:gson:2.3'</span></div><div class="line">	<span class="keyword">compile</span> <span class="string">'com.squareup.retrofit:retrofit:1.9.0'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dependencies&#123;</div><div class="line">	compile &apos;com.google.code.gson:gson:2.3&apos;</div><div class="line">	compile &apos;com.squareup.retrofit:retrofit:1.9.0&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="内置版本仓库"><a href="#内置版本仓库" class="headerlink" title="内置版本仓库"></a>内置版本仓库</h3><p>为了方便，gradle已经内置了三个Maven版本仓库，如果要使用，只需要在repositories代码块中进行声明，其内置的Maven版本仓库为：JCenter,Maven Center和local Maven repository。如下代码演示了如何添加版本仓库</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">repositories</span> &#123;</div><div class="line">       <span class="selector-tag">mavenCentral</span>()</div><div class="line">	   <span class="selector-tag">jcenter</span>()</div><div class="line">       <span class="selector-tag">mavenLocal</span>()</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">       mavenCentral()</div><div class="line">	   jcenter()</div><div class="line">       mavenLocal()</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
 <p>mavenCentral和jCenter都是有名的版本仓库，不必同时使用，当前AndroidStudio默认使用jcenter，同时jcenter还支持Https，所以还是建议使用Jcenter</p>
 <p>关于mavenLocal如果原先你使用Maven管理过依赖，那么在gradle中添加mavenLocal（）即可使用原先的依赖包，但是确保在你的用户主目录有.m2目录，在OS X或Linux系统式<strong>~/.m2</strong>,在Windowns环境下是<strong>\%UserProfile%.m2</strong>目录下</p>
 <h3 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h3><p>有一些大的公司或者组织他们更喜欢将自己的开源出来的二进制包放在自己的Maven或者Ivy服务器下而不是发布到MavenCetral或者Jcenter上，所以如果要添加这些版本仓库里的依赖，可以参考如下代码</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="section">repositories</span> &#123;</div><div class="line">       <span class="section">maven</span> &#123;</div><div class="line">           <span class="attribute">url</span> <span class="string">"http://repo.acmecorp.com/maven2"</span></div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">       maven &#123;</div><div class="line">           url &quot;http://repo.acmecorp.com/maven2&quot;</div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>同理Ivy库如下</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="section">repositories</span> &#123;</div><div class="line">       <span class="section">ivy</span> &#123;</div><div class="line">           <span class="attribute">url</span> <span class="string">"http://repo.acmecorp.com/repo"</span></div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">       ivy &#123;</div><div class="line">           url &quot;http://repo.acmecorp.com/repo&quot;</div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果你的公司有自己的Maven或者Ivy库，同时需要通过用户名和密码验证，可以参考如下代码</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> <span class="section">repositories</span> &#123;</div><div class="line">       <span class="section">maven</span> &#123;</div><div class="line">           <span class="attribute">url</span> <span class="string">"http://repo.acmecorp.com/maven2"</span></div><div class="line">           credentials &#123;</div><div class="line">               <span class="attribute">username</span> <span class="string">'user'</span></div><div class="line">               password <span class="string">'secretpassword'</span></div><div class="line">           &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> repositories &#123;</div><div class="line">       maven &#123;</div><div class="line">           url &quot;http://repo.acmecorp.com/maven2&quot;</div><div class="line">           credentials &#123;</div><div class="line">               username &apos;user&apos;</div><div class="line">               password &apos;secretpassword&apos;</div><div class="line">           &#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="本地依赖"><a href="#本地依赖" class="headerlink" title="本地依赖"></a>本地依赖</h2><blockquote>
 <p>在某些情况下，你可能任然需要下载Jar包，或者要引用一些So包，因为公共的版本仓库上没有相应的包，这一节主要介绍这种情况下该如何配置gradle</p>
 </blockquote>
 <h3 id="文件依赖"><a href="#文件依赖" class="headerlink" title="文件依赖"></a>文件依赖</h3><p>添加一个Jar包作为依赖，你可以使用gradle提供的<strong>files</strong>方法，如下代码演示了如何使用</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> files(<span class="string">'libs/domoarigato.jar'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">       compile files(&apos;libs/domoarigato.jar&apos;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果你有很多的Jar包，你可以直接添加jar包所在的目录</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">fileTree</span>(<span class="string">'libs'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>默认情况下，在AndroidStudio中新创建一个项目会默认创建libs目录，在build.gradle文件中默认添加了如下代码<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">       compile fileTree(&apos;libs&apos;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>默认情况下，在AndroidStudio中新创建一个项目会默认创建libs目录，在build.gradle文件中默认添加了如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> dependencies &#123;</div><div class="line">       compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>所以在AndroidStudio创建的项目中你可以直接将jar包放入libs目录下</p>
 <h3 id="So包的引用"><a href="#So包的引用" class="headerlink" title="So包的引用"></a>So包的引用</h3><p>从C或者C++编译过来的针对不同平台So包的引用，你只需要在模块的根目录下创建<strong>jniLibs</strong>目录，然后针对不同的平台放入不同的平台编译过的so包，具体架构可看如下图</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">app</div><div class="line"> ├── AndroidManifest<span class="selector-class">.xml</span></div><div class="line"> └── jniLibs</div><div class="line">     ├── armeabi</div><div class="line">     │   └── nativelib<span class="selector-class">.so</span></div><div class="line">     ├── armeabi-v7a</div><div class="line">     │   └── nativelib<span class="selector-class">.so</span></div><div class="line">     ├── mips</div><div class="line">     │   └── nativelib<span class="selector-class">.so</span></div><div class="line">     └── x86</div><div class="line">         └── nativelib.so</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">app</div><div class="line"> ├── AndroidManifest.xml</div><div class="line"> └── jniLibs</div><div class="line">     ├── armeabi</div><div class="line">     │   └── nativelib.so</div><div class="line">     ├── armeabi-v7a</div><div class="line">     │   └── nativelib.so</div><div class="line">     ├── mips</div><div class="line">     │   └── nativelib.so</div><div class="line">     └── x86</div><div class="line">         └── nativelib.so</div></pre></td></tr></table></figure>
 <p>如果添加上述结构不管用，可能是AndroidStudio 版本或者build tools版本过低不支持，你可通过在build.gradle文件加入如下代码解决此问题</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> android &#123;</div><div class="line">       sourceSets<span class="selector-class">.main</span> &#123;</div><div class="line">           jniLibs<span class="selector-class">.srcDir</span> <span class="string">'src/main/libs'</span></div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> android &#123;</div><div class="line">       sourceSets.main &#123;</div><div class="line">           jniLibs.srcDir &apos;src/main/libs&apos;</div><div class="line">       &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="库项目的依赖（Library-Projects）"><a href="#库项目的依赖（Library-Projects）" class="headerlink" title="库项目的依赖（Library Projects）"></a>库项目的依赖（Library Projects）</h3><blockquote>
 <p>如果你创作了一些很酷的UI控件或者实用的工具包，你可以通过创建Library Project来解决这个问题，Library Project能生成一个.aar的文件，这个aar文件即可以被app项目引用，或者你可以直接引用library模块，详细见下文</p>
 </blockquote>
 <h4 id="创建和使用库模块"><a href="#创建和使用库模块" class="headerlink" title="创建和使用库模块"></a>创建和使用库模块</h4><p>跟Android application plugin不一样，库项目在build.gradle文件的开头使用的是</p>
-<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply plugin: <span class="symbol">'com</span>.android.<span class="keyword">library</span>‘</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply plugin: &apos;com.android.library‘</div></pre></td></tr></table></figure>
 <p>有两种方式可以引用库模块，方式一是在你的项目（project）中直接引用，方式二是通过库模块生成aar文件，然后再到你的项目中引用aar文件</p>
 <p>如果你通过方式一引用项目你需要在<strong>settings.gradle</strong>文件中添加如下样式的代码</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">include</span> <span class="string">':app'</span>, <span class="string">':library'</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">include &apos;:app&apos;, &apos;:library&apos;</div></pre></td></tr></table></figure>
 <p>然后在build.gradle文件的dependencies块中加入如下代码</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':library'</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile project(&apos;:library&apos;)</div></pre></td></tr></table></figure>
 <h4 id="使用-aar文件"><a href="#使用-aar文件" class="headerlink" title="使用.aar文件"></a>使用.aar文件</h4><p>如果你想在不同的项目中重用你的库组件而又不想导入库项目，那么你可以使用.aar文件。你可以在你的库项目的/output/aar/目录中找到生成aar文件，将aar文件添加成依赖，你可以在你的项目下创建<strong>aars</strong>目录，然后添加repository，如下代码所示</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="section">repositories</span> &#123;</div><div class="line">       <span class="section">flatDir</span> &#123;</div><div class="line">	   		<span class="attribute">dirs</span> <span class="string">'aars'</span></div><div class="line">	   	 &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">repositories &#123;</div><div class="line">       flatDir &#123;</div><div class="line">	   		dirs &apos;aars&apos;</div><div class="line">	   	 &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后再添加依赖代码，如下所示</p>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">dependencies</span> &#123;</div><div class="line">       <span class="selector-tag">compile</span>(<span class="attribute">name</span>:<span class="string">'libraryname'</span>, <span class="attribute">ext</span>:<span class="string">'aar'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">       compile(name:&apos;libraryname&apos;, ext:&apos;aar&apos;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="Gradle依赖需要理解的几个概念"><a href="#Gradle依赖需要理解的几个概念" class="headerlink" title="Gradle依赖需要理解的几个概念"></a>Gradle依赖需要理解的几个概念</h2><blockquote>
 <p>gradle在配置依赖的时候有一些概念需要理解，即便现在我们可能还没有用到，但是理解这些如“compile”、“testCompile”这些scope属性的意义可以更好的使用gradle</p>
 </blockquote>
@@ -398,7 +399,7 @@
 <h3 id="动态的版本号"><a href="#动态的版本号" class="headerlink" title="动态的版本号"></a>动态的版本号</h3><blockquote>
 <p>在某些情况下，你可能需要所依赖项目最新版本，但是你有不能每次自己去查询版本然后再修改，这个时候你可以使用动态版本号，如下代码示例所示</p>
 </blockquote>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="string">'com.android.support:support-v4:22.2.+'</span></div><div class="line">       <span class="keyword">compile</span> <span class="string">'com.android.support:appcompat-v7:22.2+'</span></div><div class="line">       <span class="keyword">compile</span> <span class="string">'com.android.support:recyclerview-v7:+'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">       compile &apos;com.android.support:support-v4:22.2.+&apos;</div><div class="line">       compile &apos;com.android.support:appcompat-v7:22.2+&apos;</div><div class="line">       compile &apos;com.android.support:recyclerview-v7:+&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>v4包是设置主版本号22，小版本好是2，补丁号使用最新的；v7包是在主版本号为22的版本下，小版本是最新的；而V7得recycleview包是当前能在版本仓库下获取的最新的，没有主版本号的限制</p>
 <blockquote>
 <p>需要注意的是，当使用动态版本号时，有可能使得gradle获取依赖包时不稳定而导致构建失败，更严重可能导致获取到不同版本到本地缓存中从而引起程序调用api紊乱，Androidstudio也会在使用动态版本号时做出提示</p>
@@ -445,7 +446,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/11/GradleForAndroid系列2/" rel="next" title="Gradle For Android系列2：自定义Build配置">
+              <a href="/2016/04/11/2016-04-11-GradleForAndroid系列2/" rel="next" title="Gradle For Android系列2：自定义Build配置">
                 <i class="fa fa-chevron-left"></i> Gradle For Android系列2：自定义Build配置
               </a>
             
@@ -453,7 +454,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/04/17/GradleForAndroid系列4/" rel="prev" title="Gradle For Android系列4：创建Build Variants">
+              <a href="/2016/04/17/2016-04-17-GradleForAndroid系列4/" rel="prev" title="Gradle For Android系列4：创建Build Variants">
                 Gradle For Android系列4：创建Build Variants <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -481,8 +482,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/14/GradleForAndroid系列3/"
-           data-title="Gradle For Android系列3：gradle依赖管理" data-url="http:/yamlee.me/2016/04/14/GradleForAndroid系列3/">
+      <div class="ds-thread" data-thread-key="2016/04/14/2016-04-14-GradleForAndroid系列3/"
+           data-title="Gradle For Android系列3：gradle依赖管理" data-url="http:/yamlee.me/2016/04/14/2016-04-14-GradleForAndroid系列3/">
       </div>
     
   </div>
