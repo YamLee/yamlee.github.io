@@ -1,0 +1,734 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="YamLee, Android,Deveolop,Mobile Dev" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Android Studio不仅可以为应用和库创建模块，还可以为Android Wear，Android TV，Google App Engine等创建模块。 所有这些模块可以在单个项目中一起使用。 例如，你可能需要创建一个应用，该应用使用Google Cloud Endpoints作为后端，并包含与Android Wear的集成。 在这种情况下，你可以拥有一个包含三个不同模块的项目：一个用于应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gradle For Android系列5：多模块构建管理">
+<meta property="og:url" content="http:/yamlee.me/2016/04/20/GradleForAndroid系列5/index.html">
+<meta property="og:site_name" content="Lee Blog">
+<meta property="og:description" content="Android Studio不仅可以为应用和库创建模块，还可以为Android Wear，Android TV，Google App Engine等创建模块。 所有这些模块可以在单个项目中一起使用。 例如，你可能需要创建一个应用，该应用使用Google Cloud Endpoints作为后端，并包含与Android Wear的集成。 在这种情况下，你可以拥有一个包含三个不同模块的项目：一个用于应用">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/6b051377gw1f9bmsun2c1j21e214qtcw.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/6b051377gw1f9crasgw7sj20830a0jrw.jpg">
+<meta property="og:updated_time" content="2016-11-07T06:22:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gradle For Android系列5：多模块构建管理">
+<meta name="twitter:description" content="Android Studio不仅可以为应用和库创建模块，还可以为Android Wear，Android TV，Google App Engine等创建模块。 所有这些模块可以在单个项目中一起使用。 例如，你可能需要创建一个应用，该应用使用Google Cloud Endpoints作为后端，并包含与Android Wear的集成。 在这种情况下，你可以拥有一个包含三个不同模块的项目：一个用于应用">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/6b051377gw1f9bmsun2c1j21e214qtcw.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http:/yamlee.me/2016/04/20/GradleForAndroid系列5/"/>
+
+  <title> Gradle For Android系列5：多模块构建管理 | Lee Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lee Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">专注移动开发</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/resume" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Gradle For Android系列5：多模块构建管理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-20T00:00:00+08:00" content="2016-04-20">
+              2016-04-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Gradle-For-Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Gradle For Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/20/GradleForAndroid系列5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/20/GradleForAndroid系列5/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Android Studio不仅可以为应用和库创建模块，还可以为Android Wear，Android TV，Google App Engine等创建模块。 所有这些模块可以在单个项目中一起使用。 例如，你可能需要创建一个应用，该应用使用Google Cloud Endpoints作为后端，并包含与Android Wear的集成。 在这种情况下，你可以拥有一个包含三个不同模块的项目：一个用于应用程序，一个用于后端，一个用于Android Wear集成。 了解多模块项目的结构和构建可以显着加快你的开发周期。</p>
+<blockquote>
+<p>Gradle和Gradle Android插件的文档都使用<strong>多项目构建（multiproject builds）</strong>的术语。 但是，在Android Studio中，模块和项目之间有区别。 模块指的是一个单独应用：例如Android应用程序或Google App Engine后端。而一个项目(Project)是所有模块的集合。在本书中，我们使用术语<strong>模块</strong>和<strong>项目</strong>与IDE的方式相同，以避免混淆。 在浏览文档时请记住这一点。</p>
+</blockquote>
+<p>在本章中，我们将介绍多模块构建的理论，然后展示一些在实际开发中有用的例子：</p>
+<ul>
+<li>解析多模块构建</li>
+<li>向项目添加模块</li>
+<li>最佳实践</li>
+</ul>
+<a id="more"></a>
+<h2 id="解析多模块构建"><a href="#解析多模块构建" class="headerlink" title="解析多模块构建"></a>解析多模块构建</h2><p>通常，项目根目录下包含多个子模块项目来组织多模块项目。要告诉Gradle项目是如何结构化的，哪些目录包含模块，你需要在项目的根目录中提供一个settings.gradle文件。然后每个模块都可以提供自己的build.gradle文件。我们已经在<a href="">第2章“基本构建自定义”</a>中了解了settings.gradle和build.gradle文件的工作方式，因此这里我们将仅关注如何将它们用于多模块项目。</p>
+<p>多模块项目结构目录如下：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">project</div><div class="line">    <span class="string">|-setting.gradle</span></div><div class="line">    <span class="string">|-build.gradle</span></div><div class="line">    <span class="string">|-app</span></div><div class="line">        <span class="string">|-buid.gradle</span></div><div class="line">    <span class="string">|-library</span></div><div class="line">        <span class="string">|-build.gradle</span></div></pre></td></tr></table></figure>
+<p>这是设置具有多模块项目最简单和最直接的方法。 settings.gradle文件声明项目中所有模块，其内容如下所示：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">include</span> <span class="string">':app'</span>, <span class="string">':library'</span></div></pre></td></tr></table></figure>
+<p>确保应用程序和库模块包含在构建配置中。你只需要添加模块的目录的名称到settings文件中。</p>
+<p>要将库模块添加为应用程序模块的依赖，你需要将其添加到应用程序模块的build.gradle文件：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':library'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>为了对模块添加依赖，您需要使用project（）方法，<br>以模块路径作为参数。</p>
+<p>如果要使用子目录来组织模块，可以配置Gradle以满足你的需求。 例如，你可以具有如下所示的目录结构：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">project</div><div class="line">    <span class="string">|-setting.gradle</span></div><div class="line">    <span class="string">|-build.gradle</span></div><div class="line">    <span class="string">|-app</span></div><div class="line">        <span class="string">|-build.gradle</span></div><div class="line">    <span class="string">|-libraries</span></div><div class="line">        <span class="string">|-library1</span></div><div class="line">            <span class="string">|-build.gradle</span></div><div class="line">        <span class="string">|-library2</span></div><div class="line">            <span class="string">|-build.gradle</span></div></pre></td></tr></table></figure>
+<p>应用程序模块跟原来一样还是位于项目根目录下，但项目现在有两个不同的库模块。这些库模块不位于项目的根目录，但在一个特定的libraries目录。有了这个目录结构，你可以在这样settings.gradle声明应用程序和库模块：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">include</span> <span class="string">':app'</span>, <span class="string">':libraries:library1'</span>, <span class="string">':libraries:library2'</span></div></pre></td></tr></table></figure>
+<p>注意到在子目录中声明模块是很容易的。 所有路径都相对于根目录（settings.gradle文件所在的位置）。 冒号用作路径中的正斜杠的替换。</p>
+<p>当在子目录中将模块作为依赖关系添加到另一个模块时，应该始终从根目录引用它。 这意味着，如果上一个示例中的应用程序模块依赖于library1，应用程序模块的build.gradle文件应如下所示：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':libraries:library1'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果在子目录中声明依赖关系，所有路径应该仍然相对于根目录。 这样做的是因为Gradle从项目的根目录开始构建项目的依赖关系模型。</p>
+<h3 id="Build生命周期回顾"><a href="#Build生命周期回顾" class="headerlink" title="Build生命周期回顾"></a>Build生命周期回顾</h3><p>了解构建过程模型是如何构建的可以让你更容易理解多模块项目的组成原理。 我们已经在<a href="">第1章 开始使用Gradle和Android Studio</a>中讨论了构建生命周期，因此你已经了解了基础知识，但是一些细节对于多模块构建尤其重要。</p>
+<p>在第一阶段，初始化阶段，Gradle寻找一个settings.gradle文件。如果此文件不存在，Gradle会假定你只有一个构建模块。如果你有多个模块，则需要在setting文件中定义包含各个模块的目录。如果这些子目录包含自己的build.gradle文件，Gradle将处理这些子目录，并将它们合并到构建过程模型中。这就解释了为什么你在app模块依赖library模块时，依赖的路径需要相对于根路径 Gradle将总是尝试从根路径中找出依赖。</p>
+<p>一旦你了解了构建过程模型是如何组合在一起的，有几个策略来配置多模块项目构建。你可以在根目录中的build.gradle文件中配置所有模块的构建过程。这使得很容易得到一个项目的整个构建配置的概述，但它可能会变得非常混乱，特别是当你有模块，需要不同的插件，每个都有自己的DSL的时候。另一种方法是为每个模块分别建立build.gradle文件。该策略确保模块彼此不紧密耦合。它还使得更容易跟踪构建更改，因为您不需要确定哪个更改适用于哪个模块。</p>
+<p>最后一个策略是混合方法。您可以在项目根目录中创建一个构建文件，以定义所有模块的公共属性，以及每个模块的构建文件，以配置仅应用于该特定模块的设置。 Android Studio遵循此方法。它在根目录中创建一个build.gradle文件，并为模块创建另一个build.gradle文件。</p>
+<h3 id="模块任务"><a href="#模块任务" class="headerlink" title="模块任务"></a>模块任务</h3><p>一旦你的项目中有多个模块，你就需要在运行任务之前考虑两次。当你在命令行界面中从项目根目录运行任务时，Gradle将确定哪些模块具有任务并为每个模块执行它。例如，如果你有一个移动设备<br>应用模块和一个Android Wear模块，运行<strong>gradlew assembleDebug</strong>将构建移动应用程序模块和Android Wear模块的调试版本。但是，当你将目录更改为其中一个模块时，Gradle将只运行该特定模块的任务，即使你在项目的根目录中使用Gradle包装器。例如，从Android Wear模块目录运行../gradlew assembleDebug只会构建Android Wear模块。</p>
+<p>切换目录以运行特定于模块的任务可能会令人厌烦。幸运的是，还有另一种方法。你可以使用模块名称 + 任务名称，实现在该特定模块上运行任务。例如，要仅构建Android Wear模块，可以使用<strong>gradlew :wear :assembleDebug</strong>命令。</p>
+<h2 id="向项目添加模块"><a href="#向项目添加模块" class="headerlink" title="向项目添加模块"></a>向项目添加模块</h2><p>通过在Android Studio中执行添加新模块。会出现添加向导，向还可以设置构建过程。在某些情况下，添加模块可能会导致Android Studio编辑应用程序模块的构建文件。例如，添加Android Wear模块时，IDE会假设你想要在Android应用中使用它，会在构建文件的依赖块中添加一行来依赖Android Wear模块。</p>
+<p>这是Android Studio中的New Module对话框的样子：</p>
+<p><img src="http://ww3.sinaimg.cn/large/6b051377gw1f9bmsun2c1j21e214qtcw.jpg" alt=""></p>
+<p>在以下部分中，将展示如何将不同模块添加到Android Studio中，顺带解释其自定义属性，并指定如何更改构建过程。</p>
+<h3 id="添加Java-Library模块"><a href="#添加Java-Library模块" class="headerlink" title="添加Java Library模块"></a>添加Java Library模块</h3><p>当你添加新的Java库模块时，Android Studio生成的build.gradle文件如下所示：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">apply plugin: <span class="string">'java'</span></div><div class="line"></div><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Java库模块使用Java插件，而不是我们常用的Android插件。这意味着很多Android特定的属性和任务不可用，在Java库中，你不也需要那些任务。</p>
+<p>构建文件还具有基本的依赖关系管理设置，因此你可以将JAR文件添加到libs文件夹，而无需任何特殊配置。 你可以使用<a href="">第3章“管理依赖关系”</a>中学到的内容添加更多依赖关系。依赖关系配置不依赖于Android插件。</p>
+<p>例如,要将名为javalib的Java库模块添加为应用程序模块的依赖关系。只需将此行添加到应用程序模块的构建配置文件中：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':javalib'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Gradle会在构建中导入一个名为javalib的模块。如果在应用程序模块中添加此模块的依赖，那么javalib模块将始终在应用程序模块构建之前先行构建。</p>
+<h3 id="添加Android-Library模块"><a href="#添加Android-Library模块" class="headerlink" title="添加Android Library模块"></a>添加Android Library模块</h3><p>Android Library的默认build.gradle文件从这行开始：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply <span class="string">plugin:</span> <span class="string">'com.android.library'</span></div></pre></td></tr></table></figure>
+<p>在Android Library模块上添加依赖关系的方法与Java库完全相同：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':androidlib'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Android Library不仅包含Java代码，而且还包含所有Android资源，例如manifest文件，string和layout。 在应用中引用Android Library后，你可以使用Libarary中的所有的class和resource。</p>
+<h3 id="集成Android-Wear"><a href="#集成Android-Wear" class="headerlink" title="集成Android Wear"></a>集成Android Wear</h3><p>如果你想将应用程序深度整合到Android Wear中，就必须新增Android Wear模块。但需要注意的是，Android Wear模块也使用Android application plugin。这意味着application的所有构建属性和任务都可用。</p>
+<p>build.gradle文件与常规Android应用程序模块不同的唯一部分是依赖性配置：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])</div><div class="line">       <span class="keyword">compile</span> <span class="string">'com.google.android.support:wearable:1.1.0'</span></div><div class="line">       <span class="keyword">compile</span> <span class="string">'com.google.android.gms:play-services-wearable:6.5.87'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>每个Android Wear应用都依赖于Google提供的几个Android Wear专用库。要在Android应用中依赖Android Wear应用，你可以在Android应用中加入wear库的依赖：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">       wearApp <span class="keyword">project</span>(<span class="string">':wear'</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上配置可确保Wear模块在进行必要的设置后将wear模块的APK被添加到Android应用程序的APK中。</p>
+<h3 id="使用Google-App-Engine"><a href="#使用Google-App-Engine" class="headerlink" title="使用Google App Engine"></a>使用Google App Engine</h3><blockquote>
+<p>原文中有较详细的介绍，因为被墙，所以暂时不作介绍</p>
+</blockquote>
+<h2 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h2><p>接下来介绍几种方法，这些方法可以更容易地处理多模块项目；在使用多个模块时还有一些注意事项，本节会详细介绍。</p>
+<h3 id="在Android-Studio中运行模块的gradle任务"><a href="#在Android-Studio中运行模块的gradle任务" class="headerlink" title="在Android Studio中运行模块的gradle任务"></a>在Android Studio中运行模块的gradle任务</h3><p>正如我们在[第2章“基本构建定制”]中看到的，可以在Android Studio直接运行Gradle任务。当你有多个模块时，Android Studio也会识别它们，并分组显示所有可用任务及相关描述。</p>
+<p><img src="http://ww4.sinaimg.cn/large/6b051377gw1f9crasgw7sj20830a0jrw.jpg" alt=""></p>
+<p>Gradle工具窗口使运行特定模块的Gradle任务变得更加容易。但是问题是没有选项可以同时运行所有模块的任务了，所以你的需求是希望Gradle任务同时在所有模块上生效，使用命令行还是更快一些。</p>
+<h3 id="加快多模块编译速度"><a href="#加快多模块编译速度" class="headerlink" title="加快多模块编译速度"></a>加快多模块编译速度</h3><p>当你构建多模块项目时，Gradle会按顺序处理所有模块。 随着多核计算机越来越多，你可以设置并行构建来加快构建速度。此功能在Gradle中已存在，但默认情况下未启用。</p>
+<p>如果要对项目应用并行构建执行，则需要在项目根目录下的gradle.properties文件中配置parallel属性：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">org<span class="selector-class">.gradle</span><span class="selector-class">.parallel</span>=true</div></pre></td></tr></table></figure>
+<p>Gradle会根据可用的CPU内核数选择正确的线程数。为了防止在同一模块并行执行而产生并发问题，每个线程都拥有一整个模块。</p>
+<h3 id="模块耦合"><a href="#模块耦合" class="headerlink" title="模块耦合"></a>模块耦合</h3><p>正如我们在<a href="">第2章“基本构建定制”</a>中看到的，可以使用build.gradle文件中的<strong>allprojects</strong>定义项目中所有模块的属性。当你具有包含多个模块的项目时，可以使用任何模块中的<strong>allprojects</strong>将属性应用于项目中的所有模块。一个模块甚至可以引用另一个模块的属性。这些强大的功能可以使多模块构建的维护更容易。但缺点是，你的模块变得耦合。</p>
+<p>一旦两个模块访问对方的任务或属性，就认为它们是耦合的。这有几个后果，例如，模块变得难以移植，当你试图将某一个项目引用到其他项目中时，因为模块间的耦合，导致抽离出模块很困难；模块耦合对并行构建也有影响,在模块中使用allprojects块将使并行构建执行无效。以上两点都需要注意。</p>
+<p>你可以通过不直接访问其他模块的任务或属性来避免耦合。通过使用根模块作为中介，使得模块仅耦合到根模块，而不是彼此耦合。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这一章，我们研究了如何在单个项目中设置多个模块， 还了解到了添加新模块会影响构建任务的运行方式。</p>
+<p>然后，我们查看了一些添加新模块的实际示例，以及如何将每个模块集成到一个项目中。 最后，我们提到了一些优化技巧，使得在一个项目中使用多个模块更容易。</p>
+<p>在下一章中，我们将设置各种测试，并了解如何使用Gradle来更容易运行这些测试。我们将直接在Java虚拟机上查看运行单元测试，也可以在真机或模拟器上运行测试。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>写得好，就打赏一下吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat_pay.png" alt="YamLee WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/17/GradleForAndroid系列4/" rel="next" title="Gradle For Android系列4：创建Build Variants">
+                <i class="fa fa-chevron-left"></i> Gradle For Android系列4：创建Build Variants
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/25/GradleForAndroid系列6/" rel="prev" title="Gradle For Android系列6：运行测试">
+                Gradle For Android系列6：运行测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/20/GradleForAndroid系列5/"
+           data-title="Gradle For Android系列5：多模块构建管理" data-url="http:/yamlee.me/2016/04/20/GradleForAndroid系列5/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="YamLee" />
+          <p class="site-author-name" itemprop="name">YamLee</p>
+          <p class="site-description motion-element" itemprop="description">专注移动开发</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yamlee" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yamleeShao" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/yamlee" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#解析多模块构建"><span class="nav-number">1.</span> <span class="nav-text">解析多模块构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Build生命周期回顾"><span class="nav-number">1.1.</span> <span class="nav-text">Build生命周期回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块任务"><span class="nav-number">1.2.</span> <span class="nav-text">模块任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向项目添加模块"><span class="nav-number">2.</span> <span class="nav-text">向项目添加模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加Java-Library模块"><span class="nav-number">2.1.</span> <span class="nav-text">添加Java Library模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加Android-Library模块"><span class="nav-number">2.2.</span> <span class="nav-text">添加Android Library模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集成Android-Wear"><span class="nav-number">2.3.</span> <span class="nav-text">集成Android Wear</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Google-App-Engine"><span class="nav-number">2.4.</span> <span class="nav-text">使用Google App Engine</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最佳实践"><span class="nav-number">3.</span> <span class="nav-text">最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在Android-Studio中运行模块的gradle任务"><span class="nav-number">3.1.</span> <span class="nav-text">在Android Studio中运行模块的gradle任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加快多模块编译速度"><span class="nav-number">3.2.</span> <span class="nav-text">加快多模块编译速度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块耦合"><span class="nav-number">3.3.</span> <span class="nav-text">模块耦合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YamLee</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yamlee"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

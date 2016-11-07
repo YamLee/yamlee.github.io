@@ -84,21 +84,21 @@
 
 
 
-<meta name="description" content="当你在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：你正在增加新功能，然后你需要发布版本提交给QA，测试通过后再发布线上版本，可能线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：你的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限，针对如上两种情况你就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代买里">
+<meta name="description" content="当你在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：你正在增加新功能，然后你需要发布版本提交给QA，测试通过后再发布线上版本，可能线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：你的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限，针对如上两种情况你就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代买">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android开发中Gradle的使用系列四：创建Build Variants">
-<meta property="og:url" content="http:/yamlee.me/2016/04/16/2016-04-16-Android开发Gradle的使用系列四之创建BuildVariant/index.html">
+<meta property="og:title" content="Gradle For Android系列4：创建Build Variants">
+<meta property="og:url" content="http:/yamlee.me/2016/04/17/GradleForAndroid系列4/index.html">
 <meta property="og:site_name" content="Lee Blog">
-<meta property="og:description" content="当你在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：你正在增加新功能，然后你需要发布版本提交给QA，测试通过后再发布线上版本，可能线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：你的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限，针对如上两种情况你就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代买里">
+<meta property="og:description" content="当你在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：你正在增加新功能，然后你需要发布版本提交给QA，测试通过后再发布线上版本，可能线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：你的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限，针对如上两种情况你就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代买">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/6b051377gw1f2ylgvqp1pj20ry0yodjb.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/mw690/6b051377gw1f2ylxe43qdj20dk0c6gmm.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/mw690/6b051377gw1f2ym04dcu1j20uu04it96.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/6b051377gw1f2ym6exl4xj20im06eq3c.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/mw690/6b051377gw1f2ym73936uj20ic066q3e.jpg">
-<meta property="og:updated_time" content="2016-10-08T06:35:53.000Z">
+<meta property="og:updated_time" content="2016-11-07T06:22:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android开发中Gradle的使用系列四：创建Build Variants">
-<meta name="twitter:description" content="当你在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：你正在增加新功能，然后你需要发布版本提交给QA，测试通过后再发布线上版本，可能线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：你的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限，针对如上两种情况你就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代买里">
+<meta name="twitter:title" content="Gradle For Android系列4：创建Build Variants">
+<meta name="twitter:description" content="当你在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：你正在增加新功能，然后你需要发布版本提交给QA，测试通过后再发布线上版本，可能线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：你的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限，针对如上两种情况你就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代买">
 <meta name="twitter:image" content="http://ww4.sinaimg.cn/large/6b051377gw1f2ylgvqp1pj20ry0yodjb.jpg">
 
 
@@ -120,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="http:/yamlee.me/2016/04/16/2016-04-16-Android开发Gradle的使用系列四之创建BuildVariant/"/>
+  <link rel="canonical" href="http:/yamlee.me/2016/04/17/GradleForAndroid系列4/"/>
 
-  <title> Android开发中Gradle的使用系列四：创建Build Variants | Lee Blog </title>
+  <title> Gradle For Android系列4：创建Build Variants | Lee Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -252,7 +252,7 @@
             
             
               
-                Android开发中Gradle的使用系列四：创建Build Variants
+                Gradle For Android系列4：创建Build Variants
               
             
           </h1>
@@ -264,8 +264,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-16T16:24:30+08:00" content="2016-04-16">
-              2016-04-16
+            <time itemprop="dateCreated" datetime="2016-04-17T00:00:00+08:00" content="2016-04-17">
+              2016-04-17
             </time>
           </span>
 
@@ -294,8 +294,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/16/2016-04-16-Android开发Gradle的使用系列四之创建BuildVariant/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/16/2016-04-16-Android开发Gradle的使用系列四之创建BuildVariant/" itemprop="commentsCount"></span>
+                <a href="/2016/04/17/GradleForAndroid系列4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/17/GradleForAndroid系列4/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -318,9 +318,11 @@
       
 
       
-        <p>当你在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：你正在增加新功能，然后你需要发布版本提交给QA，测试通过后再发布线上版本，可能线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：你的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限，针对如上两种情况你就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代买里面硬编码会使得项目异常复杂。gradle针对这种情况，提出了解决这种问题的方法，对于QA版或线上版可以配置<strong>build type</strong>，Androidstudio默认配置了Debug和Release两种type，对于付费版或者免费版，可以通过配置<strong>Build flavors</strong>。这两种类型组合起来就叫做<strong>build variant</strong></p>
-<a id="more"></a>
+        <blockquote>
+<p>当你在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：你正在增加新功能，然后你需要发布版本提交给QA，测试通过后再发布线上版本，可能线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：你的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限，针对如上两种情况你就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代买里面硬编码会使得项目异常复杂。gradle针对这种情况，提出了解决这种问题的方法，对于QA版或线上版可以配置<strong>build type</strong>，Androidstudio默认配置了Debug和Release两种type，对于付费版或者免费版，可以通过配置<strong>Build flavors</strong>。这两种类型组合起来就叫做<strong>build variant</strong></p>
+</blockquote>
 <h2 id="Build-types"><a href="#Build-types" class="headerlink" title="Build types"></a>Build types</h2><p>Gradle在Android中的build type是用来处理app或者library应该被构建成什么类型，在这个配置中，你可以定义应用的包名是什么，是否自动去除掉没有引用的资源，是否开启混淆等等。具体配置可参考如下代码</p>
+<a id="more"></a>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="section">android</span> &#123;</div><div class="line">       <span class="section">buildTypes</span> &#123;</div><div class="line">           <span class="section">release</span> &#123;</div><div class="line">               <span class="attribute">minifyEnabled</span> <span class="literal">false</span></div><div class="line">               proguardFiles getDefaultProguardFile</div><div class="line">                 (<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></div><div class="line">           &#125;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>当你新建一个项目或者模块时，build.gradle文件会默认配置上release的build type，默认配置屏蔽了混淆功能（即将 minifyEnabled设置为false）和定义混淆文件的位置。<br>除了release build type再就是debug build type也是默认创建好的，但是没有在代码里显示出来，如果你想修改默认Debug中的配置，你需要自己声明出来</p>
 <blockquote>
@@ -353,7 +355,7 @@
 <p>如果你不确定什么时候用build type，什么时候改用produc flavors，那么问自己几个问题，如果是构建不同类型供内部使用或者是在google palay上提交一个新的app，那么建议使用build type；如果app要分发在不同的渠道上，那么建议product flavors</p>
 </blockquote>
 <h3 id="创建-product-flavors"><a href="#创建-product-flavors" class="headerlink" title="创建 product flavors"></a>创建 product flavors</h3><p>创建product flavors与build types非常相似，你只需要添加<strong>productFlavor</strong>代码块，如下代码所示</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"> <span class="section">android</span> &#123;</div><div class="line">       <span class="section">productFlavors</span> &#123;</div><div class="line">           <span class="section">red</span> &#123;</div><div class="line">               <span class="attribute">applicationId</span> <span class="string">'com.gradleforandroid.red'</span></div><div class="line">               versionCode <span class="number">3</span></div><div class="line">￼				&#125;</div><div class="line">			blue &#123;</div><div class="line">            	<span class="attribute">applicationId</span> <span class="string">'com.gradleforandroid.blue'</span></div><div class="line">            	minSdkVersion <span class="number">14</span></div><div class="line">            	versionCode <span class="number">4</span></div><div class="line">				&#125;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"> <span class="section">android</span> &#123;</div><div class="line">       <span class="section">productFlavors</span> &#123;</div><div class="line">           <span class="section">red</span> &#123;</div><div class="line">               <span class="attribute">applicationId</span> <span class="string">'com.gradleforandroid.red'</span></div><div class="line">               versionCode <span class="number">3</span></div><div class="line">				&#125;</div><div class="line">			blue &#123;</div><div class="line">            	<span class="attribute">applicationId</span> <span class="string">'com.gradleforandroid.blue'</span></div><div class="line">            	minSdkVersion <span class="number">14</span></div><div class="line">            	versionCode <span class="number">4</span></div><div class="line">				&#125;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>Product flavors与build types属性不同，因为product flavors其实是ProductFlavors类，build.gradle文件中默认添加的<strong><em>defaultConfig</em></strong>也是ProductFlavors类的实例。</p>
 <h3 id="不同product-flavors的代码目录结构设置"><a href="#不同product-flavors的代码目录结构设置" class="headerlink" title="不同product flavors的代码目录结构设置"></a>不同product flavors的代码目录结构设置</h3><p>与build type的设置类似，product flavors也可以配置自己的代码目录</p>
 <h3 id="Multiflavor-variants"><a href="#Multiflavor-variants" class="headerlink" title="Multiflavor variants"></a>Multiflavor variants</h3><p>在某些情况下，你可能需要进行flavors的组合，比方说你的app有两套主题，绿色主题和红色主题，然后有两个版本，付费版和免费版，你可能需要进行组合，类似于红色免费，红色收费，绿色免费，绿色收费。通过使用<strong>flavorDimensions</strong>可以解决flavors组合的问题，配置可参考如下代码</p>
@@ -385,7 +387,7 @@
 <p>关于资源和manifest文件的合并，有很多具体的细节在这里没法阐述，官方文档给了更多更详细的解释，你可以访问这个地址 <a href="http://tools.android.com/tech-docs/new-build- system/user-guide/manifest-merger" target="_blank" rel="external">Android Developer:Manifest-Merger</a></p>
 </blockquote>
 <h2 id="创建build-variants"><a href="#创建build-variants" class="headerlink" title="创建build variants"></a>创建build variants</h2><p>gradle使得处理复杂的build varinats非常容易，及时你创建了两种build type和两种product flavors。build文件中代码还是非常清晰明了</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="section">android</span> &#123;</div><div class="line">       <span class="section">buildTypes</span> &#123;</div><div class="line">           <span class="section">debug</span> &#123;</div><div class="line">               <span class="attribute">buildConfigField</span> <span class="string">"String"</span>, <span class="string">"API_URL"</span>,</div><div class="line">               <span class="string">"\"http://test.example.com/api\""</span></div><div class="line">			&#125;</div><div class="line">           staging.initWith(android.buildTypes.<span class="literal">debug</span>)</div><div class="line">           staging &#123;</div><div class="line">               <span class="attribute">buildConfigField</span> <span class="string">"String"</span>, <span class="string">"API_URL"</span>,</div><div class="line">                 <span class="string">"\"http://staging.example.com/api\""</span></div><div class="line">               applicationIdSuffix <span class="string">".staging"</span></div><div class="line">           &#125;</div><div class="line">		&#125;</div><div class="line">       productFlavors &#123;</div><div class="line">           <span class="section">red</span> &#123;</div><div class="line">               <span class="attribute">applicationId</span> <span class="string">"com.gradleforandroid.red"</span></div><div class="line">               resValue <span class="string">"color"</span>, <span class="string">"flavor_color"</span>, <span class="string">"#ff0000"</span></div><div class="line">           &#125;</div><div class="line">           blue &#123;</div><div class="line">               <span class="attribute">applicationId</span> <span class="string">"com.gradleforandroid.blue"</span></div><div class="line">               resValue <span class="string">"color"</span>, <span class="string">"flavor_color"</span>, <span class="string">"#0000ff"</span></div><div class="line">￼￼￼￼￼			&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="section">android</span> &#123;</div><div class="line">       <span class="section">buildTypes</span> &#123;</div><div class="line">           <span class="section">debug</span> &#123;</div><div class="line">               <span class="attribute">buildConfigField</span> <span class="string">"String"</span>, <span class="string">"API_URL"</span>,</div><div class="line">               <span class="string">"\"http://test.example.com/api\""</span></div><div class="line">			&#125;</div><div class="line">           staging.initWith(android.buildTypes.<span class="literal">debug</span>)</div><div class="line">           staging &#123;</div><div class="line">               <span class="attribute">buildConfigField</span> <span class="string">"String"</span>, <span class="string">"API_URL"</span>,</div><div class="line">                 <span class="string">"\"http://staging.example.com/api\""</span></div><div class="line">               applicationIdSuffix <span class="string">".staging"</span></div><div class="line">           &#125;</div><div class="line">		&#125;</div><div class="line">       productFlavors &#123;</div><div class="line">           <span class="section">red</span> &#123;</div><div class="line">               <span class="attribute">applicationId</span> <span class="string">"com.gradleforandroid.red"</span></div><div class="line">               resValue <span class="string">"color"</span>, <span class="string">"flavor_color"</span>, <span class="string">"#ff0000"</span></div><div class="line">           &#125;</div><div class="line">           blue &#123;</div><div class="line">               <span class="attribute">applicationId</span> <span class="string">"com.gradleforandroid.blue"</span></div><div class="line">               resValue <span class="string">"color"</span>, <span class="string">"flavor_color"</span>, <span class="string">"#0000ff"</span></div><div class="line">			&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在上面的代码中，我们创建了四种build variats：blueDebug,blueStaging,redDebug,redStaging.每一个variant都自定义了API URL 和flavor corlor.运行程序bllueDebug可能为如下所示</p>
 <p><img src="http://ww4.sinaimg.cn/large/6b051377gw1f2ym6exl4xj20im06eq3c.jpg" alt=""></p>
 <p>而redStaging可能如下图所示</p>
@@ -403,7 +405,7 @@
 </blockquote>
 <p>加入了签名配置后，就可以使用签名信息了，代码可参考如下</p>
 <p>在buildType中使用</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> <span class="section">android</span> &#123;</div><div class="line">       <span class="section">buildTypes</span> &#123;</div><div class="line">           <span class="section">release</span> &#123;</div><div class="line">               <span class="attribute">signingConfig</span> signingConfigs.release</div><div class="line">￼￼￼￼￼&#125; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> <span class="section">android</span> &#123;</div><div class="line">       <span class="section">buildTypes</span> &#123;</div><div class="line">           <span class="section">release</span> &#123;</div><div class="line">               <span class="attribute">signingConfig</span> signingConfigs.release</div><div class="line">&#125; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在flavors中使用</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> android &#123;</div><div class="line">       buildTypes &#123;</div><div class="line">           release &#123;</div><div class="line">               productFlavors<span class="selector-class">.red</span><span class="selector-class">.signingConfig</span> signingConfigs<span class="selector-class">.red</span></div><div class="line">               productFlavors<span class="selector-class">.blue</span><span class="selector-class">.signingConfig</span> signingConfigs<span class="selector-class">.blue</span></div><div class="line">&#125; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>由上代码可知，你不能如下配置</p>
@@ -451,16 +453,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/13/2016-04-13-Android开发Gradle的使用系列三之Gradle依赖管理/" rel="next" title="Android开发中Gradle的使用系列三：gradle依赖管理">
-                <i class="fa fa-chevron-left"></i> Android开发中Gradle的使用系列三：gradle依赖管理
+              <a href="/2016/04/14/GradleForAndroid系列3/" rel="next" title="Gradle For Android系列3：gradle依赖管理">
+                <i class="fa fa-chevron-left"></i> Gradle For Android系列3：gradle依赖管理
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/24/2016-10-25-深入Android-Data-Binding（一）：使用详解/" rel="prev" title="深入Android Data Binding（一）：使用详解">
-                深入Android Data Binding（一）：使用详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/04/20/GradleForAndroid系列5/" rel="prev" title="Gradle For Android系列5：多模块构建管理">
+                Gradle For Android系列5：多模块构建管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -487,8 +489,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/16/2016-04-16-Android开发Gradle的使用系列四之创建BuildVariant/"
-           data-title="Android开发中Gradle的使用系列四：创建Build Variants" data-url="http:/yamlee.me/2016/04/16/2016-04-16-Android开发Gradle的使用系列四之创建BuildVariant/">
+      <div class="ds-thread" data-thread-key="2016/04/17/GradleForAndroid系列4/"
+           data-title="Gradle For Android系列4：创建Build Variants" data-url="http:/yamlee.me/2016/04/17/GradleForAndroid系列4/">
       </div>
     
   </div>
@@ -533,7 +535,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
