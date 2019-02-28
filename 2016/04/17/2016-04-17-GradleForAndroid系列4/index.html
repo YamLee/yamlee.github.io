@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next pisces use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -87,7 +87,7 @@
 <meta name="description" content="当你在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：你正在增加新功能，然后你需要发布版本提交给QA，测试通过后再发布线上版本，可能线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：你的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限，针对如上两种情况你就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代买里">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gradle For Android系列4：创建Build Variants">
-<meta property="og:url" content="http:/yamlee.me/2016/04/17/2016-04-17-GradleForAndroid系列4/index.html">
+<meta property="og:url" content="http://yamlee.me/2016/04/17/2016-04-17-GradleForAndroid系列4/index.html">
 <meta property="og:site_name" content="Lee Blog">
 <meta property="og:description" content="当你在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：你正在增加新功能，然后你需要发布版本提交给QA，测试通过后再发布线上版本，可能线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：你的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限，针对如上两种情况你就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代买里">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/6b051377gw1f2ylgvqp1pj20ry0yodjb.jpg">
@@ -106,7 +106,7 @@
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
+    scheme: 'Pisces',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http:/yamlee.me/2016/04/17/2016-04-17-GradleForAndroid系列4/"/>
+  <link rel="canonical" href="http://yamlee.me/2016/04/17/2016-04-17-GradleForAndroid系列4/"/>
 
   <title> Gradle For Android系列4：创建Build Variants | Lee Blog </title>
 </head>
@@ -129,6 +129,15 @@
 
   
 
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-122582412-1', 'auto');
+  ga('send', 'pageview');
+</script>
 
 
 
@@ -347,7 +356,7 @@
 <p>如果你没有自定义string那gradle就会默认使用main目录下的string，对于AndroidManifest.xml文件也是一样的，你如果要修改manifest文件不全部拷贝，你只需要加入你需要的代码,gradle会自动合并，在后续部分会更深入的介绍gradle合并的原理</p>
 <h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>每一个build type有可能有自己独立的依赖，如果你配置了，gradle会自动识别配置，例如你要在在debug type中加入一个日志框架，你可以参考如下代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> dependencies &#123;</div><div class="line">       compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])</div><div class="line">       compile &apos;com.android.support:appcompat-v7:22.2.0&apos;</div><div class="line">       debugCompile &apos;de.mindpipe.android:android-logging-log4j:1.0.3&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>debugCompile</strong>表示只在debug type中把log4j加入到编译路径中，关于常用的集中依赖scope请参考<a href="http://yamlee.me/2016/04/13/Android%E5%BC%80%E5%8F%91Gradle%E7%9A%84%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E4%B8%89%E4%B9%8BGradle%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/" target="_blank" rel="external">系列三:Gradle依赖管理</a></p>
+<p><strong>debugCompile</strong>表示只在debug type中把log4j加入到编译路径中，关于常用的集中依赖scope请参考<a href="http://yamlee.me/2016/04/13/Android%E5%BC%80%E5%8F%91Gradle%E7%9A%84%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E4%B8%89%E4%B9%8BGradle%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/">系列三:Gradle依赖管理</a></p>
 <h2 id="Product-fllavors"><a href="#Product-fllavors" class="headerlink" title="Product fllavors"></a>Product fllavors</h2><blockquote>
 <p>与build type相反，build type用来构建不同类型的app，debug版或release版，而produc flavors则是用来在同一个app上创建不同的版本，如付费版和免费版。一个非常常见的应用场景就是你创建了一个银行管理的app给不同银行提供服务，但是不同的银行App的logo不一样，有produc flavors就能在基于一套代码上创建不同版本的app或者library。</p>
 <p>如果你不确定什么时候用build type，什么时候改用produc flavors，那么问自己几个问题，如果是构建不同类型供内部使用或者是在google palay上提交一个新的app，那么建议使用build type；如果app要分发在不同的渠道上，那么建议product flavors</p>
@@ -488,7 +497,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/04/17/2016-04-17-GradleForAndroid系列4/"
-           data-title="Gradle For Android系列4：创建Build Variants" data-url="http:/yamlee.me/2016/04/17/2016-04-17-GradleForAndroid系列4/">
+           data-title="Gradle For Android系列4：创建Build Variants" data-url="http://yamlee.me/2016/04/17/2016-04-17-GradleForAndroid系列4/">
       </div>
     
   </div>
@@ -533,7 +542,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -541,7 +550,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -620,7 +629,7 @@
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -634,7 +643,7 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Pisces
   </a>
 </div>
 
@@ -699,6 +708,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
