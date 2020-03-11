@@ -260,6 +260,129 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/17/2016-04-17-GradleForAndroid系列4/" itemprop="url">
+                  Gradle For Android系列4：创建Build Variants
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-17T00:00:00+08:00" content="2016-04-17">
+              2016-04-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Gradle-For-Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Gradle For Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/17/2016-04-17-GradleForAndroid系列4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/17/2016-04-17-GradleForAndroid系列4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>当你在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：你正在增加新功能，然后你需要发布版本提交给QA，测试通过后再发布线上版本，可能线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：你的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限，针对如上两种情况你就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代买里面硬编码会使得项目异常复杂。gradle针对这种情况，提出了解决这种问题的方法，对于QA版或线上版可以配置<strong>build type</strong>，Androidstudio默认配置了Debug和Release两种type，对于付费版或者免费版，可以通过配置<strong>Build flavors</strong>。这两种类型组合起来就叫做<strong>build variant</strong></p>
+<h2 id="Build-types"><a href="#Build-types" class="headerlink" title="Build types"></a>Build types</h2><p>Gradle在Android中的build type是用来处理app或者library应该被构建成什么类型，在这个配置中，你可以定义应用的包名是什么，是否自动去除掉没有引用的资源，是否开启混淆等等。具体配置可参考如下代码</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/17/2016-04-17-GradleForAndroid系列4/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/14/2016-04-14-GradleForAndroid系列3/" itemprop="url">
                   Gradle For Android系列3：gradle依赖管理
                 </a>
@@ -916,7 +1039,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
