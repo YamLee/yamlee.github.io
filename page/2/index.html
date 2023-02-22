@@ -191,6 +191,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yamlee.me/2016/05/02/2016-05-02-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%978/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="YamLee">
+      <meta itemprop="description" content="专注移动开发">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lee Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/05/02/2016-05-02-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%978/" class="post-title-link" itemprop="url">Android Gradle最佳实践系列8：设置CI(集成开发环境)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-05-02 00:00:00" itemprop="dateCreated datePublished" datetime="2016-05-02T00:00:00+08:00">2016-05-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-08 12:06:59" itemprop="dateModified" datetime="2022-04-08T12:06:59+08:00">2022-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android-Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">Android Gradle最佳实践系列</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>持续集成（CI）</strong> 是一种开发实践方式，需要团队中的开发人员定期集成代码编译，测试工作，通常每天多次，每次推送到主代码仓库都需要通过自动构建进行验证。这种做法有助于尽快发现问题，从而加快开发速度，并提高代码的质量。大拿Martin Fowler写了一篇关于这个主题的文章，解释了这些概念，并描述了<a target="_blank" rel="noopener" href="http://martinfowler.com/articles/continuousIntegration.html">持续集成最佳实践</a></p>
+<p>有几种方式可以为Android设置CI。最广泛使用的是Jenkins，TeamCity和Travis CI。Jenkins有最大的生态系统，有大约1000个可用的插件，Jenkins本身是一个开源项目与现在仍然有很多贡献者。TeamCity是JetBrains的产品，JetBrains我们应该都很熟悉，JetBrains也创建了IntelliJ IDEA（Android Studio就是基于此开发的）。 Travis CI是相对较新，主要用于开源项目。</p>
+<p>这一章节，我们将学习到这些CI系统，以及如何让Gradle在这些系统上工作。在本章结尾处，还将学到一些Gradle技巧，使自动化CI更容易。</p>
+<p>这一章节，主要包括如下几个部分：</p>
+<ul>
+<li>Jenkins</li>
+<li>TeamCity</li>
+<li>Travis CI</li>
+<li>更多技巧</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/05/02/2016-05-02-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%978/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yamlee.me/2016/04/28/2016-04-28-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%977/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -864,14 +954,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -913,7 +1003,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
