@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yamlee.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"shuying.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="当我们在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：我们正在开发新功能，开发完成后需要发布提测版本提交给QA测试人员，测试通过后再发布线上版本，这时线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：我们的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限。针对如上两种情况我们就需要发布四个apk，免费QA版，免费线上版，付费QA版，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android Gradle最佳实践系列4：创建Build Variants">
-<meta property="og:url" content="http://yamlee.me/2016/04/17/2016-04-17-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%974/index.html">
+<meta property="og:url" content="http://shuying.me/2016/04/17/2016-04-17-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%974/index.html">
 <meta property="og:site_name" content="Lee Blog">
 <meta property="og:description" content="当我们在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：我们正在开发新功能，开发完成后需要发布提测版本提交给QA测试人员，测试通过后再发布线上版本，这时线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：我们的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限。针对如上两种情况我们就需要发布四个apk，免费QA版，免费线上版，付费QA版，">
 <meta property="og:locale" content="zh_CN">
@@ -38,7 +38,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2021/08/06/cpNeGrBjfq6gUzo.jpg">
 
-<link rel="canonical" href="http://yamlee.me/2016/04/17/2016-04-17-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%974/">
+<link rel="canonical" href="http://shuying.me/2016/04/17/2016-04-17-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%974/">
 
 
 <script id="page-configurations">
@@ -52,7 +52,7 @@
 </script>
 
   <title>Android Gradle最佳实践系列4：创建Build Variants | Lee Blog</title>
-  
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122582412-1"></script>
     <script>
       if (CONFIG.hostname === location.hostname) {
@@ -180,7 +180,7 @@
 </div>
     </header>
 
-    
+
   <div class="back-to-top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
@@ -191,16 +191,16 @@
     <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
+
 
           <div class="content post posts-expand">
-            
 
-    
-  
-  
+
+
+
+
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yamlee.me/2016/04/17/2016-04-17-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%974/">
+    <link itemprop="mainEntityOfPage" href="http://shuying.me/2016/04/17/2016-04-17-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%974/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -242,17 +242,17 @@
                 </span>
             </span>
 
-          
+
 
         </div>
       </header>
 
-    
-    
-    
+
+
+
     <div class="post-body" itemprop="articleBody">
 
-      
+
         <p>当我们在开发一款应用时，通常会面临发布不同的版本需求。举两个常见的场景，场景一：我们正在开发新功能，开发完成后需要发布提测版本提交给QA测试人员，测试通过后再发布线上版本，这时线下版本和测试版本的服务器接口域名不一样又或者有不同的api接口；场景二：我们的app需要发布一个免费版本和付费版本，付费版本会有更高的使用权限。针对如上两种情况我们就需要发布四个apk，免费QA版，免费线上版，付费QA版，付费线上版，如果在代码里面硬编码会使得项目异常复杂。gradle针对这种情况，提出了解决这种问题的方法，对于QA版或线上版可以配置<strong>build type</strong>，Androidstudio默认配置了Debug和Release两种type，对于付费版或者免费版，可以通过配置<strong>Build flavors</strong>。这两种类型组合起来就叫做<strong>build variant</strong></p>
 <h2 id="Build-types"><a href="#Build-types" class="headerlink" title="Build types"></a>Build types</h2><p>Gradle在Android中的build type是用来处理app或者library应该被构建成什么类型，在这个配置中，我们可以定义应用的包名是什么，是否自动去除掉没有引用的资源，是否开启混淆等等。具体配置可参考如下代码</p>
 <span id="more"></span>
@@ -293,7 +293,7 @@
 <h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>每一个build type有可能有自己独立的依赖，如果我们配置了，gradle会自动识别配置，例如要在debug type中加入一个日志框架，可以参考如下代码</p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">dependencies</span> &#123;</span><br><span class="line">       <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">&#x27;libs&#x27;</span>, <span class="keyword">include</span>: [<span class="string">&#x27;*.jar&#x27;</span>])</span><br><span class="line">       <span class="keyword">compile</span> <span class="string">&#x27;com.android.support:appcompat-v7:22.2.0&#x27;</span></span><br><span class="line">       debugCompile <span class="string">&#x27;de.mindpipe.android:android-logging-log4j:1.0.3&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>debugCompile</strong>表示只在debug type中把log4j加入到编译路径中，关于常用的集中依赖scope请参考<a href="http://yamlee.me/2016/04/13/Android%E5%BC%80%E5%8F%91Gradle%E7%9A%84%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E4%B8%89%E4%B9%8BGradle%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/">系列三:Gradle依赖管理</a></p>
+<p><strong>debugCompile</strong>表示只在debug type中把log4j加入到编译路径中，关于常用的集中依赖scope请参考<a href="http://shuying.me/2016/04/13/Android%E5%BC%80%E5%8F%91Gradle%E7%9A%84%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E4%B8%89%E4%B9%8BGradle%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/">系列三:Gradle依赖管理</a></p>
 <h2 id="Product-flavors"><a href="#Product-flavors" class="headerlink" title="Product flavors"></a>Product flavors</h2><p>与build type相反，build type用来构建不同类型的app，debug版或release版，而produc flavors则是用来在同一个app上创建不同的版本，如付费版和免费版。一个非常常见的应用场景就是我们创建了一个银行管理的app给不同银行提供服务，但是不同的银行App的logo不一样，有produc flavors就能在基于一套代码上创建不同版本的app或者library。</p>
 <p>如果我们不确定什么时候用build type，什么时候该用product flavors，那么问自己几个问题，如果是构建不同类型供内部使用或者是在google palay上提交一个新的app，建议使用build type；如果app要分发在不同的渠道上，那么建议product flavors</p>
 <h3 id="创建-product-flavors"><a href="#创建-product-flavors" class="headerlink" title="创建 product flavors"></a>创建 product flavors</h3><p>创建product flavors与build types非常相似，你只需要添加<strong>productFlavor</strong>代码块，如下代码所示</p>
@@ -360,10 +360,10 @@
 
     </div>
 
-    
-    
-    
-        
+
+
+
+
 
 <div>
 <ul class="post-copyright">
@@ -372,7 +372,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yamlee.me/2016/04/17/2016-04-17-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%974/" title="Android Gradle最佳实践系列4：创建Build Variants">http://yamlee.me/2016/04/17/2016-04-17-Android Gradle最佳实践系列4/</a>
+    <a href="http://shuying.me/2016/04/17/2016-04-17-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%974/" title="Android Gradle最佳实践系列4：创建Build Variants">http://shuying.me/2016/04/17/2016-04-17-Android Gradle最佳实践系列4/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -383,10 +383,10 @@
 
       <footer class="post-footer">
 
-        
 
 
-        
+
+
     <div class="post-nav">
       <div class="post-nav-item">
     <a href="/2016/04/14/2016-04-14-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%973/" rel="prev" title="Android Gradle最佳实践系列3：依赖管理">
@@ -398,16 +398,16 @@
     </a></div>
     </div>
       </footer>
-    
+
   </article>
-  
-  
-  
+
+
+
 
 
 
           </div>
-          
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -432,8 +432,8 @@
 </script>
 
         </div>
-          
-  
+
+
   <div class="toggle sidebar-toggle">
     <span class="toggle-line toggle-line-first"></span>
     <span class="toggle-line toggle-line-middle"></span>
@@ -469,14 +469,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
-        
+
           <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-          
+
         <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
@@ -495,7 +495,7 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://yamlee.me/" title="http:&#x2F;&#x2F;yamlee.me&#x2F;">Title</a>
+          <a href="http://shuying.me/" title="http:&#x2F;&#x2F;shuying.me&#x2F;">Title</a>
         </li>
     </ul>
   </div>
@@ -512,13 +512,13 @@
 
     <footer class="footer">
       <div class="footer-inner">
-        
 
-        
+
+
 
 <div class="copyright">
-  
-  &copy; 
+
+  &copy;
   <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -528,7 +528,7 @@
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
-        
+
 
 
 
@@ -541,7 +541,7 @@
     </footer>
   </div>
 
-  
+
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -559,12 +559,12 @@
 
 
 
-  
 
 
 
 
-  
+
+
 <script src="/js/local-search.js"></script>
 
 
@@ -579,9 +579,9 @@
 
 
 
-  
 
-  
+
+
 
 </body>
 </html>

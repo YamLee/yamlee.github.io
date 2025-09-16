@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yamlee.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"shuying.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="Android Studio不仅可以为应用和库创建模块，还可以为Android Wear，Android TV，Google App Engine等创建模块。 所有这些模块可以在单个项目中一起管理。 例如，我们可能需要创建一个应用，该应用使用Google Cloud Endpoints作为后端，并包含与Android Wear的集成。 在这种情况下，就需要有一个包含三个不同模块的项目：一个用于手机">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android Gradle最佳实践系列5：多模块构建">
-<meta property="og:url" content="http://yamlee.me/2016/04/20/2016-04-20-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%975/index.html">
+<meta property="og:url" content="http://shuying.me/2016/04/20/2016-04-20-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%975/index.html">
 <meta property="og:site_name" content="Lee Blog">
 <meta property="og:description" content="Android Studio不仅可以为应用和库创建模块，还可以为Android Wear，Android TV，Google App Engine等创建模块。 所有这些模块可以在单个项目中一起管理。 例如，我们可能需要创建一个应用，该应用使用Google Cloud Endpoints作为后端，并包含与Android Wear的集成。 在这种情况下，就需要有一个包含三个不同模块的项目：一个用于手机">
 <meta property="og:locale" content="zh_CN">
@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2021/08/10/NoYmpnVXiBzQcKJ.jpg">
 
-<link rel="canonical" href="http://yamlee.me/2016/04/20/2016-04-20-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%975/">
+<link rel="canonical" href="http://shuying.me/2016/04/20/2016-04-20-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%975/">
 
 
 <script id="page-configurations">
@@ -49,7 +49,7 @@
 </script>
 
   <title>Android Gradle最佳实践系列5：多模块构建 | Lee Blog</title>
-  
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122582412-1"></script>
     <script>
       if (CONFIG.hostname === location.hostname) {
@@ -177,7 +177,7 @@
 </div>
     </header>
 
-    
+
   <div class="back-to-top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
@@ -188,16 +188,16 @@
     <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          
+
 
           <div class="content post posts-expand">
-            
 
-    
-  
-  
+
+
+
+
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yamlee.me/2016/04/20/2016-04-20-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%975/">
+    <link itemprop="mainEntityOfPage" href="http://shuying.me/2016/04/20/2016-04-20-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%975/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -239,17 +239,17 @@
                 </span>
             </span>
 
-          
+
 
         </div>
       </header>
 
-    
-    
-    
+
+
+
     <div class="post-body" itemprop="articleBody">
 
-      
+
         <p>Android Studio不仅可以为应用和库创建模块，还可以为Android Wear，Android TV，Google App Engine等创建模块。 所有这些模块可以在单个项目中一起管理。 例如，我们可能需要创建一个应用，该应用使用Google Cloud Endpoints作为后端，并包含与Android Wear的集成。 在这种情况下，就需要有一个包含三个不同模块的项目：一个用于手机应用程序，一个用于后端，一个用于Android Wear集成。 了解多模块项目的结构和构建可以显着加快我们的开发效率，缩短开发周期。</p>
 <blockquote>
 <p>Gradle和Gradle Android插件的文档都使用<strong>多项目构建（multiproject builds）</strong>的术语。 但是，在Android Studio中，模块和项目之间有区别。 模块指的是一个单独应用：例如Android应用程序或Google App Engine后端。而一个项目(Project)是所有模块的集合。在本书中，我们使用术语<strong>模块</strong>和<strong>项目</strong>与IDE的方式相同，以避免混淆。 在阅读本篇文章内容时请记住这一点。</p>
@@ -341,10 +341,10 @@
 
     </div>
 
-    
-    
-    
-        
+
+
+
+
 
 <div>
 <ul class="post-copyright">
@@ -353,7 +353,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yamlee.me/2016/04/20/2016-04-20-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%975/" title="Android Gradle最佳实践系列5：多模块构建">http://yamlee.me/2016/04/20/2016-04-20-Android Gradle最佳实践系列5/</a>
+    <a href="http://shuying.me/2016/04/20/2016-04-20-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%975/" title="Android Gradle最佳实践系列5：多模块构建">http://shuying.me/2016/04/20/2016-04-20-Android Gradle最佳实践系列5/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -364,10 +364,10 @@
 
       <footer class="post-footer">
 
-        
 
 
-        
+
+
     <div class="post-nav">
       <div class="post-nav-item">
     <a href="/2016/04/17/2016-04-17-Android%20Gradle%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E7%B3%BB%E5%88%974/" rel="prev" title="Android Gradle最佳实践系列4：创建Build Variants">
@@ -379,16 +379,16 @@
     </a></div>
     </div>
       </footer>
-    
+
   </article>
-  
-  
-  
+
+
+
 
 
 
           </div>
-          
+
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -413,8 +413,8 @@
 </script>
 
         </div>
-          
-  
+
+
   <div class="toggle sidebar-toggle">
     <span class="toggle-line toggle-line-first"></span>
     <span class="toggle-line toggle-line-middle"></span>
@@ -450,14 +450,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
-        
+
           <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-          
+
         <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
@@ -476,7 +476,7 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="http://yamlee.me/" title="http:&#x2F;&#x2F;yamlee.me&#x2F;">Title</a>
+          <a href="http://shuying.me/" title="http:&#x2F;&#x2F;shuying.me&#x2F;">Title</a>
         </li>
     </ul>
   </div>
@@ -493,13 +493,13 @@
 
     <footer class="footer">
       <div class="footer-inner">
-        
 
-        
+
+
 
 <div class="copyright">
-  
-  &copy; 
+
+  &copy;
   <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -509,7 +509,7 @@
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
 
-        
+
 
 
 
@@ -522,7 +522,7 @@
     </footer>
   </div>
 
-  
+
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -540,12 +540,12 @@
 
 
 
-  
 
 
 
 
-  
+
+
 <script src="/js/local-search.js"></script>
 
 
@@ -560,9 +560,9 @@
 
 
 
-  
 
-  
+
+
 
 </body>
 </html>
